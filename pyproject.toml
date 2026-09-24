@@ -1,0 +1,19 @@
+[project]
+name = "super-store"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Nathan Wanjongkhum", email = "wanjongkhumnathan@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "kagglehub>=1.0.2",
+]
+
+[project.scripts]
+super-store = "super_store:main"
+
+[build-system]
+requires = ["uv_build>=0.12.13,<0.13.0"]
+build-backend = "uv_build"
