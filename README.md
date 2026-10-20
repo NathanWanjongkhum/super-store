@@ -29,10 +29,10 @@ The [EDA notebook](notebooks/01-eda.ipynb) is where the dashboard's questions ca
 
 ### Where the profit comes from
 
-Each slice is one region's share of the $1.47M total profit for 2011–2014, sorted largest first, clockwise from the top. Profit is concentrated but not dependent on any single region: the top three (Central, North and North Asia) earn 46% of it, while EMEA, the Caribbean, Southeast Asia and Canada together earn under 8%. A share of profit reflects how big a region is, not how efficiently it sells: a small region can still earn a healthy margin. That's why the dashboard's market chart measures profit against a margin target instead.
+Each bar is one region's total profit for 2011–2014, labelled with its share of the $1.47M total and sorted largest first. Profit is concentrated but not dependent on any single region: the top three (Central, North and North Asia) earn 46% of it, while EMEA, the Caribbean, Southeast Asia and Canada together earn under 8%. A share of profit reflects how big a region is, not how efficiently it sells: a small region can still earn a healthy margin. That's why the dashboard's market chart measures profit against a margin target instead.
 
 <p align="center">
-  <img src="docs/eda-profit-by-region.png" alt="Ring chart of total profit by region, led by Central at 21%" width="70%">
+  <img src="docs/eda-profit-by-region.png" alt="Bar chart of total profit by region, led by Central at 21%" width="70%">
 </p>
 
 ### Who the customers are
