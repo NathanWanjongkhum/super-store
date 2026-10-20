@@ -4,7 +4,7 @@
 
 An executive dashboard that answers *"are we on track, and what needs attention this week?"* for a global retailer. It covers 51K order lines from 2011–2014, from raw Kaggle data through analysis to a tested, deployable Streamlit app.
 
-**[Live demo](https://REPLACE-ME.streamlit.app)** · [EDA notebook](notebooks/01-eda.ipynb) · [Metric dictionary](docs/metrics.md) · [Design decisions](docs/decisions.md)
+**[Live demo](https://super-store-qgh8zpgpqk4umqicuehq7w.streamlit.app/)** · [EDA notebook](notebooks/01-eda.ipynb) · [Metric dictionary](docs/metrics.md) · [Design decisions](docs/decisions.md)
 
 ![Executive summary dashboard](docs/executive-summary.png)
 
