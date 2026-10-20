@@ -4,7 +4,7 @@
 
 An executive dashboard that answers *"are we on track, and what needs attention this week?"* for a global retailer. It covers 51K order lines from 2011–2014, from raw Kaggle data through analysis to a tested, deployable Streamlit app.
 
-**[Live demo](https://super-store-qgh8zpgpqk4umqicuehq7w.streamlit.app/)** · [EDA notebook](notebooks/01-eda.ipynb) · [Metric dictionary](docs/metrics.md) · [Design decisions](docs/decisions.md)
+**[Live demo](https://super-store-qgh8zpgpqk4umqicuehq7w.streamlit.app/)** · [EDA notebook](notebooks/01-eda.ipynb) · [Metric dictionary](docs/metrics.md) · [Design decisions](docs/decisions.md) · [Power BI version](#power-bi-version)
 
 ![Executive summary dashboard](docs/executive-summary.png)
 
@@ -65,12 +65,34 @@ The discount finding below came from following up on the margin question that th
 
 ![Drill-down page](docs/drill-down.png)
 
+## Power BI version
+
+The dashboard is also rebuilt in Power BI Desktop, on the same cleaned data (exported from the Python loader) and with the same KPIs, targets and status rules. For Dec 2014 year to date, every number matches the Streamlit app: $4,300,041 sales, 11.7% margin, 82.0% retention, 19.1% revenue at risk, and the same 4,873 customers in the same 10 RFM segments.
+
+![Power BI executive summary](docs/powerbi-executive-summary.png)
+
+<p align="center">
+  <img src="docs/powerbi-drill-down.png" alt="Power BI drill-down page broken down by market: profit margin bars against the 12% target and a breakdown table" width="49%">
+  <img src="docs/powerbi-customers-rfm.png" alt="Power BI customers page: customer count by RFM segment, segment summary table and a frequency by recency score matrix" width="49%">
+</p>
+
+How the app's features map to Power BI:
+
+- **As-of month and period.** Disconnected `As Of` and `Period` tables drive DAX measures that compute the date window and the same window last year, so every KPI follows the selectors as it does in the app.
+- **KPI cards.** A small KPI table (name, direction, owner, drill-down) feeds one set of measures for value, target, status and color, so all six cards share the same logic.
+- **What-if targets.** Numeric range parameters replace the sidebar inputs, with the defaults from `config/targets.toml`.
+- **Drill-down.** A field parameter replaces the "Break down by" control, and Export data replaces the CSV download.
+- **RFM.** Recency and frequency scores are calculated columns that reproduce pandas' `rank(method="first")` and `qcut` exactly, so segment counts match the Python code.
+
+Differences from the app: the RFM page and Revenue at Risk are calculated as of Dec 2014 only, the KPI cards have no sparklines, and the action items are three tables (off-track KPIs, markets below the margin target, loss-making sub-categories) instead of one ranked list.
+
 ## How it's built
 
 | | |
 |---|---|
 | **Analysis** | Jupyter EDA with pandas, matplotlib and seaborn; RFM customer segmentation; cleaning a dataset with corrupted date columns (rebuilt from year + week number) |
 | **App** | Streamlit multipage app with Altair charts, cached data loading, and a shared sidebar state |
+| **BI** | Power BI rebuild with DAX measures, what-if parameters, a field parameter for the drill-down, and RFM scoring as calculated columns |
 | **Design** | Inverted-pyramid executive layout, status colors with labels, no pie charts or dual axes |
 | **Engineering** | Business logic in a typed, tested Python package, separate from the UI; targets and owners in a config file validated with pydantic, which also sets the sidebar inputs' limits |
 | **Reliability** | Data validation on load, an offline snapshot fallback, a "data through" freshness line, and friendly error messages |
