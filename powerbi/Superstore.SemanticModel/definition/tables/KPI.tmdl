@@ -1,0 +1,64 @@
+table KPI
+	lineageTag: ebac0391-7642-4476-bf61-27f9963678de
+
+	column KPI
+		dataType: string
+		lineageTag: 810e2d84-8374-439d-b15f-e273a2663866
+		summarizeBy: none
+		sourceColumn: KPI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order
+		dataType: int64
+		formatString: 0
+		lineageTag: 0ebb38d2-c86e-47c1-869b-cde4097b1c16
+		summarizeBy: sum
+		sourceColumn: Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Higher Is Better'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c9a34f1f-4f01-4f2c-b231-8014d2388797
+		summarizeBy: none
+		sourceColumn: Higher Is Better
+
+		annotation SummarizationSetBy = Automatic
+
+	column Kind
+		dataType: string
+		lineageTag: 9ea82fc7-053b-42fa-a924-125c9c6c84f3
+		summarizeBy: none
+		sourceColumn: Kind
+
+		annotation SummarizationSetBy = Automatic
+
+	column Owner
+		dataType: string
+		lineageTag: d25c07a4-afad-4f0b-9d81-0df20caf74df
+		summarizeBy: none
+		sourceColumn: Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column Drill
+		dataType: string
+		lineageTag: 16223c15-fa5a-4397-9584-5a9f22f6dec5
+		summarizeBy: none
+		sourceColumn: Drill
+
+		annotation SummarizationSetBy = Automatic
+
+	partition KPI = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("jY49D4IwEIb/StNZBz93ghIHiaRVF8JQ8SAN0hrakvDvvZoIIovD9ZLr+zx3aUq5eIChM7rAOrPLHlutFXTYrwnRBfkEYtFUYGk2S2nS6EJanC2nUBid/CsslLrpvuIEBaVU+LkaqGdue4a723zEBW1JdtLk2imfWmNFwZEP3PjACR86Y3UNDWFgQVmp/fLN7/IDiLvX9Gnu8hyMN7IoJhzKGuG3kEELygERljBpKkxsJzf9q8te", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [KPI = _t, Order = _t, #"Higher Is Better" = _t, Kind = _t, Owner = _t, Drill = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"KPI", type text}, {"Order", Int64.Type}, {"Higher Is Better", type logical}, {"Kind", type text}, {"Owner", type text}, {"Drill", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

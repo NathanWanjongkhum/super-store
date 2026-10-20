@@ -1,0 +1,26 @@
+table 'Sales Growth Target'
+	lineageTag: b856b922-1a45-4f88-81c2-427940f293b3
+
+	measure 'Sales Growth Target Value' = SELECTEDVALUE('Sales Growth Target'[Sales Growth Target], 25)
+		formatString: 0
+		lineageTag: a44ffd73-6d79-4f1d-b886-8921ace2edb6
+
+	column 'Sales Growth Target'
+		formatString: 0
+		lineageTag: 54fcc923-6b30-4566-be60-d3df9a6ed6b0
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Sales Growth Target' = calculated
+		mode: import
+		source = GENERATESERIES(-100, 100, 1)
+
+	annotation PBI_Id = 19da5f7d028d4a1c95ef39b2dda23f40
+

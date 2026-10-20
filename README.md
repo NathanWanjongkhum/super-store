@@ -84,6 +84,8 @@ How the app's features map to Power BI:
 - **Drill-down.** A field parameter replaces the "Break down by" control, and Export data replaces the CSV download.
 - **RFM.** Recency and frequency scores are calculated columns that reproduce pandas' `rank(method="first")` and `qcut` exactly, so segment counts match the Python code.
 
+The report is saved as a Power BI project in [`powerbi/`](powerbi/), so its model and DAX are plain text and diff in git. To open it, export the data with `uv run python -c "from super_store.data import load; load().to_csv('data/superstore.csv', index=False)"`, open `powerbi/Superstore.pbip` in Power BI Desktop, and point the Orders source at that CSV (Transform data → Data source settings).
+
 Differences from the app: the RFM page and Revenue at Risk are calculated as of Dec 2014 only, the KPI cards have no sparklines, and the action items are three tables (off-track KPIs, markets below the margin target, loss-making sub-categories) instead of one ranked list.
 
 ## How it's built

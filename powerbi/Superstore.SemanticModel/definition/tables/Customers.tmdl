@@ -1,0 +1,114 @@
+table Customers
+	lineageTag: ef524388-8dff-4340-8af0-cf0fc6fef5a4
+
+	column 'Customer ID'
+		lineageTag: 360fa4a3-5dc4-4df8-991d-684b07323716
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Orders[Customer ID]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Order'
+		lineageTag: 06355c55-38e3-4ca1-b4dd-744df19ed7b8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Last Order]
+
+		variation Variation
+			isDefault
+			relationship: 6824bc49-3b55-47cb-9d84-fa8466b64e39
+			defaultHierarchy: LocalDateTable_8383e67d-67df-49f5-8621-7fd6a4f936a3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Frequency
+		lineageTag: 3cee75fb-8900-45e6-93a0-b63aa3ab0291
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Frequency]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monetary
+		lineageTag: 3f03dc08-2a83-44a8-820f-829b7d842295
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Monetary]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Recency
+		lineageTag: 7dd4b127-2ea8-4f60-b1aa-16e3f5c0d115
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Recency]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'R Rank' = VAR rec = Customers[Recency] VAR cust = Customers[Customer ID] RETURN COUNTROWS ( FILTER ( Customers, Customers[Recency] < rec || ( Customers[Recency] = rec && Customers[Customer ID] < cust ) ) ) + 1
+		formatString: 0
+		lineageTag: afd34de7-919a-4ce7-8ba5-56c9b6cbb490
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'F Rank' = VAR freq = Customers[Frequency] VAR cust = Customers[Customer ID] RETURN COUNTROWS ( FILTER ( Customers, Customers[Frequency] < freq || ( Customers[Frequency] = freq && Customers[Customer ID] < cust ) ) ) + 1
+		formatString: 0
+		lineageTag: b27aaa7c-7a11-4f99-b12b-2a9201871329
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column R = 6 - MAX ( 1, MIN ( 5, ROUNDUP ( ( Customers[R Rank] - 1 ) * 5 / ( COUNTROWS ( Customers ) - 1 ), 0 ) ) )
+		lineageTag: 0623295d-f5a1-49e9-a2f3-2ccbd5b68dbc
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column F = MAX ( 1, MIN ( 5, ROUNDUP ( ( Customers[F Rank] - 1 ) * 5 / ( COUNTROWS ( Customers ) - 1 ), 0 ) ) )
+		lineageTag: edf6d49b-3206-4646-a955-011c7d38386a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Segment =
+			
+			VAR r = Customers[R]
+			VAR f = Customers[F]
+			RETURN SWITCH ( TRUE (),
+			    r <= 2 && f <= 2, "Hibernating",
+			    r <= 2 && f <= 4, "At Risk",
+			    r <= 2, "Can't Lose",
+			    r = 3 && f <= 2, "About to Sleep",
+			    r = 3 && f = 3, "Need Attention",
+			    r <= 4 && f >= 4, "Loyal Customers",
+			    r = 4 && f = 1, "Promising",
+			    r = 5 && f = 1, "New Customers",
+			    f <= 3, "Potential Loyalists",
+			    "Champions" )
+		lineageTag: 3eaa95e1-8d73-497a-bca2-0b99dcf22f35
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customers = calculated
+		mode: import
+		source =
+				
+				VAR AsOfEnd = DATE ( 2014, 12, 31 )
+				RETURN
+				    ADDCOLUMNS (
+				        SUMMARIZE ( Orders, Orders[Customer ID] ),
+				        "Last Order", CALCULATE ( MAX ( Orders[Order Week] ) ),
+				        "Frequency", CALCULATE ( DISTINCTCOUNT ( Orders[Order ID] ) ),
+				        "Monetary", CALCULATE ( SUM ( Orders[Sales] ) ),
+				        "Recency", DATEDIFF ( CALCULATE ( MAX ( Orders[Order Week] ) ), AsOfEnd + 1, DAY )
+				    )
+
+	annotation PBI_Id = fb6f202f9ff94bdab26e75cda9dbb395
+

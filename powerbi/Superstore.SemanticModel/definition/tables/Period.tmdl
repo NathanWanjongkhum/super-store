@@ -1,0 +1,40 @@
+table Period
+	lineageTag: 67f749fa-acaf-4cd9-8bf9-70402f2e2d79
+
+	column Period
+		dataType: string
+		lineageTag: 73ee5e7a-9e3b-452a-a165-beff8347089b
+		summarizeBy: none
+		sourceColumn: Period
+		sortByColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column Short
+		dataType: string
+		lineageTag: bc4f58fe-e65f-489d-9a97-4e2a0704bae9
+		summarizeBy: none
+		sourceColumn: Short
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sort
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b8c85b0-b418-409c-a8d8-06dd423bb48c
+		summarizeBy: sum
+		sourceColumn: Sort
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Period = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8s3PK8lQKMlXSEksSVXSUfINcQGShkqxOtFKgaWJRSWpRUiygWBZI7BsZGoislQkWMoYLBVSlJiZk5mXrmBopJALsqAYKBViaOQLpEyUYmMB", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Period = _t, Short = _t, Sort = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Period", type text}, {"Short", type text}, {"Sort", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

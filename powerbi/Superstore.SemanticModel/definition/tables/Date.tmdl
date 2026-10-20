@@ -1,0 +1,44 @@
+table Date
+	lineageTag: f5dee18c-79ae-4645-93a5-0fd443d69485
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: General Date
+		lineageTag: 62a29d48-6b5b-432f-b41a-964ea790ca1b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		formatString: General Date
+		lineageTag: 588e5414-0f5f-4bda-9194-87bcdaf01dee
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Label'
+		lineageTag: 727d1e9c-c3a2-4628-8e51-d227f95f91e2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Month Label]
+		sortByColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = calculated
+		mode: import
+		source =
+				
+				ADDCOLUMNS (
+				    CALENDAR ( DATE ( 2011, 1, 1 ), DATE ( 2014, 12, 31 ) ),
+				    "Month", DATE ( YEAR ( [Date] ), MONTH ( [Date] ), 1 ),
+				    "Month Label", FORMAT ( [Date], "mmm yyyy" )
+				)
+
+	annotation PBI_Id = 19cf2321b77b4a7b82e0951093bc0fed
+

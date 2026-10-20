@@ -1,0 +1,26 @@
+table 'Max Revenue at Risk Target'
+	lineageTag: e9d4da93-0d41-4c15-84b6-6dfea55fc297
+
+	measure 'Max Revenue at Risk Target Value' = SELECTEDVALUE('Max Revenue at Risk Target'[Max Revenue at Risk Target], 15)
+		formatString: 0
+		lineageTag: 9c299615-680c-404c-b01a-569db6b2bdda
+
+	column 'Max Revenue at Risk Target'
+		formatString: 0
+		lineageTag: e3f66f57-a524-4e40-bc2c-95f1c1c16970
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Max Revenue at Risk Target' = calculated
+		mode: import
+		source = GENERATESERIES(0, 100, 1)
+
+	annotation PBI_Id = 9a459c9459804891b9d787d8c28f6b8f
+

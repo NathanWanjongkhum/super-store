@@ -1,0 +1,26 @@
+table 'Retention Target'
+	lineageTag: 8db273dc-c032-42eb-a0d8-66bf672a12c5
+
+	measure 'Retention Target Value' = SELECTEDVALUE('Retention Target'[Retention Target], 80)
+		formatString: 0
+		lineageTag: 14c629ef-e203-4400-95f7-ac78efb87851
+
+	column 'Retention Target'
+		formatString: 0
+		lineageTag: a5b57599-e8ed-43c1-bc28-667fdcb95694
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+	partition 'Retention Target' = calculated
+		mode: import
+		source = GENERATESERIES(0, 100, 1)
+
+	annotation PBI_Id = b2a1bf6defdc4133a2575ace12f8b567
+

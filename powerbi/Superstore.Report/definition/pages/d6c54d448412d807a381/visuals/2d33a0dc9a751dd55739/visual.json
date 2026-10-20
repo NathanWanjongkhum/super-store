@@ -1,0 +1,79 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "2d33a0dc9a751dd55739",
+  "position": {
+    "x": 640,
+    "y": 280,
+    "z": 5,
+    "height": 180,
+    "width": 600,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Max Revenue at Risk Target"
+                    }
+                  },
+                  "Property": "Max Revenue at Risk Target"
+                }
+              },
+              "queryRef": "Max Revenue at Risk Target.Max Revenue at Risk Target",
+              "nativeQueryRef": "Max Revenue at Risk Target",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Single'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "header": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Max Revenue at Risk target (%)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "syncGroup": {
+      "groupName": "MaxRevenueatRiskTarget",
+      "fieldChanges": true,
+      "filterChanges": true
+    }
+  }
+}

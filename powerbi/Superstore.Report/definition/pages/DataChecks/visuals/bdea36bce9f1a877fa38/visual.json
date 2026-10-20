@@ -1,0 +1,124 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "bdea36bce9f1a877fa38",
+  "position": {
+    "x": 128.11224489795919,
+    "y": 0,
+    "z": 1,
+    "height": 223.16326530612244,
+    "width": 254.84693877551018,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "As Of"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "As Of Month"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Year"
+                }
+              },
+              "queryRef": "As Of.As Of Month.Variation.Date Hierarchy.Year",
+              "nativeQueryRef": "As Of Month Year"
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "As Of"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "As Of Month"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Quarter"
+                }
+              },
+              "queryRef": "As Of.As Of Month.Variation.Date Hierarchy.Quarter",
+              "nativeQueryRef": "As Of Month Quarter"
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "As Of"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "As Of Month"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Month"
+                }
+              },
+              "queryRef": "As Of.As Of Month.Variation.Date Hierarchy.Month",
+              "nativeQueryRef": "As Of Month Month"
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "PropertyVariationSource": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "As Of"
+                            }
+                          },
+                          "Name": "Variation",
+                          "Property": "As Of Month"
+                        }
+                      },
+                      "Hierarchy": "Date Hierarchy"
+                    }
+                  },
+                  "Level": "Day"
+                }
+              },
+              "queryRef": "As Of.As Of Month.Variation.Date Hierarchy.Day",
+              "nativeQueryRef": "As Of Month Day"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

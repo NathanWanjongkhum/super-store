@@ -1,0 +1,28 @@
+table 'As Of'
+	lineageTag: 9ea9e644-d39f-48de-8ab3-e14d7fca3635
+
+	column 'As Of Month'
+		formatString: mmm yyyy
+		lineageTag: 6dc5b83c-1c0d-4fc6-aa52-fc70f3d667d1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [As Of Month]
+
+		variation Variation
+			isDefault
+			relationship: c87976ee-404a-4ee9-859a-eabc882a184e
+			defaultHierarchy: LocalDateTable_d03f6318-66a6-41c2-9fbe-540c1666b025.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'As Of' = calculated
+		mode: import
+		source =
+				
+				SELECTCOLUMNS (
+				    GENERATESERIES ( 0, 24, 1 ),
+				    "As Of Month", EDATE ( DATE ( 2012, 12, 1 ), [Value] )
+				)
+
+	annotation PBI_Id = e426e2781c4046dd98b478586533d6d3
+

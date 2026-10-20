@@ -1,0 +1,28 @@
+table 'Max Discount Target'
+	lineageTag: e0b481a5-cdce-4f7a-b40c-3537e19d0476
+
+	measure 'Max Discount Target Value' = SELECTEDVALUE('Max Discount Target'[Max Discount Target], 15)
+		lineageTag: a82c8bf6-b600-4d80-be08-6ab9fb97bfa5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Max Discount Target'
+		lineageTag: 3c14442b-074d-4506-b580-123c5530f9e4
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Max Discount Target' = calculated
+		mode: import
+		source = GENERATESERIES(0, 50, 0.5)
+
+	annotation PBI_Id = 5f8c08bcf8374aefb0b0cadec9e27060
+

@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Orders","Period","KPI","_Measures"]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table Orders
+ref table DateTableTemplate_71ec6b70-0168-4cba-9895-aefc16fcfd56
+ref table Date
+ref table 'As Of'
+ref table LocalDateTable_d03f6318-66a6-41c2-9fbe-540c1666b025
+ref table Period
+ref table KPI
+ref table Customers
+ref table 'Sales Growth Target'
+ref table 'Profit Margin Target'
+ref table 'Max Discount Target'
+ref table 'Retention Target'
+ref table 'Max Revenue at Risk Target'
+ref table LocalDateTable_8383e67d-67df-49f5-8621-7fd6a4f936a3
+ref table _Measures
+ref table 'Break down by'
+
+ref cultureInfo en-US
+

@@ -11,3 +11,7 @@ wheels/
 .env
 # Data
 data/
+
+# Power BI: local settings, data cache and the binary copy of the .pbip project
+.pbi/
+*.pbix

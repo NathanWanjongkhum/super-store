@@ -1,0 +1,18 @@
+relationship c87976ee-404a-4ee9-859a-eabc882a184e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'As Of'.'As Of Month'
+	toColumn: LocalDateTable_d03f6318-66a6-41c2-9fbe-540c1666b025.Date
+
+relationship 6824bc49-3b55-47cb-9d84-fa8466b64e39
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Customers.'Last Order'
+	toColumn: LocalDateTable_8383e67d-67df-49f5-8621-7fd6a4f936a3.Date
+
+relationship c54c0cc8-99aa-88c2-97ca-e1ce678e1ae6
+	fromColumn: Orders.'Order Week'
+	toColumn: Date.Date
+
+relationship 6e78997d-fc90-57d7-dcf5-113caa39a1c0
+	fromColumn: Orders.'Customer ID'
+	toColumn: Customers.'Customer ID'
+

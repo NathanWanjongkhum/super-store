@@ -1,0 +1,53 @@
+table 'Break down by'
+	lineageTag: 6c15f2ab-692d-4847-8c7b-8e53b64bab72
+
+	column 'Break down by'
+		dataType: string
+		lineageTag: 9c6c79f2-1aa4-464a-bab4-8bf9eb546612
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Break down by Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Break down by Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Break down by Fields'
+		dataType: string
+		isHidden
+		lineageTag: d006ea51-5f8f-4505-b2e9-ba555b114cfc
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Break down by Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Break down by Order'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: c9b03332-5862-45ad-89f7-dba422031529
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Break down by' = calculated
+		mode: import
+		source =
+				{
+				    ("Market", NAMEOF ( 'Orders'[Market] ), 0),
+				    ("Region", NAMEOF ( 'Orders'[Region] ), 1),
+				    ("Category", NAMEOF ( 'Orders'[Category] ), 2),
+				    ("Sub-Category", NAMEOF ( 'Orders'[Sub-Category] ), 3),
+				    ("Segment", NAMEOF ( 'Orders'[Segment] ), 4),
+				    ("Ship Mode", NAMEOF ( 'Orders'[Ship Mode] ), 5)
+				}
+

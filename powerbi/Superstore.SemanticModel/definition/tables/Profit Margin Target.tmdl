@@ -1,0 +1,28 @@
+table 'Profit Margin Target'
+	lineageTag: 44f60ea7-b115-429b-9eab-bb39047b4842
+
+	measure 'Profit Margin Target Value' = SELECTEDVALUE('Profit Margin Target'[Profit Margin Target], 12)
+		lineageTag: 0c62be0b-c79f-42e9-bf5b-dbc5d0f52d76
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Profit Margin Target'
+		lineageTag: d96fff7b-2adc-4f1e-8e9b-fc47772d4a39
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 0
+				}
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Profit Margin Target' = calculated
+		mode: import
+		source = GENERATESERIES(0, 50, 0.5)
+
+	annotation PBI_Id = 4f0ccbadb43b4a069f9a91b2a7601edf
+
