@@ -1,0 +1,31 @@
+# Business rules for the executive summary dashboard and weekly digest.
+# Illustrative values for a demo on the Global Superstore dataset: replace the
+# targets and owner roles with your team's own. Override the path with the
+# SUPER_STORE_CONFIG environment variable.
+
+# Default targets; the dashboard sidebar can override them as a what-if.
+[targets]
+sales_growth = 25.0   # % sales growth vs the same period last year
+profit_margin = 12.0  # % of sales
+max_discount = 15.0   # max average discount, %
+retention = 80.0      # % of last year's customers who ordered again
+max_revenue_at_risk = 15.0  # max % of lifetime sales in At Risk / Can't Lose segments
+
+# Owner role per KPI (placeholders, not real people)
+[owners.kpi]
+"Sales" = "VP of Sales"
+"Profit" = "CFO"
+"Profit Margin" = "CFO"
+"Avg Discount" = "VP of Sales"
+"Customer Retention" = "Head of Customer Success"
+"Revenue at Risk" = "Head of Customer Success"
+
+# Owners for market and sub-category action items
+[owners]
+market = "{market} Market Lead"
+category = "{category} Category Manager"
+
+# When action items are next reviewed
+[review]
+cadence = "weekly"
+weekday = "Monday"

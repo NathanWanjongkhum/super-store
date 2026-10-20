@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Nathan Wanjongkhum", email = "wanjongkhumnathan@gmail.com" }
 ]
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 dependencies = [
     "kagglehub>=1.0.2",
     "matplotlib>=3.11.2",
@@ -14,6 +14,7 @@ dependencies = [
     "pandas>=3.0.6",
     "pydantic>=2.13.5",
     "seaborn>=0.13.2",
+    "streamlit>=1.66.0",
 ]
 
 [project.scripts]
@@ -27,5 +28,40 @@ build-backend = "uv_build"
 dev = [
     "ipykernel>=7.3.0",
     "ipywidgets>=8.1.9",
+    "pytest>=9.1.1",
+    "ruff>=0.17.1",
+    "ty>=0.0.90",
     "uv>=0.12.19",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "app"]
+markers = ["slow: loads the real dataset and runs the Streamlit app (deselect with -m 'not slow')"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["super_store", "common", "charts"]
+
+[tool.ty.environment]
+python-version = "3.12"
+extra-paths = ["app"]  # app/ pages import common and charts as top-level modules
+
+# Altair's chained mark_*().encode() API isn't typed in a way ty can follow yet
+[[tool.ty.overrides]]
+include = ["app/charts.py"]
+[tool.ty.overrides.rules]
+unresolved-attribute = "ignore"
+
+# Tests build dates from constants: pd.Timestamp("2014-12-31") is typed Timestamp | NaT
+[[tool.ty.overrides]]
+include = ["tests/**"]
+[tool.ty.overrides.rules]
+invalid-argument-type = "ignore"
