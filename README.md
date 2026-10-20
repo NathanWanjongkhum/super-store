@@ -27,14 +27,31 @@ The [EDA notebook](notebooks/01-eda.ipynb) is where the dashboard's questions ca
 3. **Profitability by customer segment and region.** Consumer, Corporate and Home Office orders earn almost the same average profit ($28–30 per line), so segment isn't what drives margin. Profit is spread across 13 regions, led by Central (21%).
 4. **RFM customer segmentation.** Every customer is scored 1–5 on recency, frequency and monetary value, then grouped into 10 segments (Champions, Loyal Customers, At Risk, and so on), shown on an RFM grid. Loyal Customers and Champions are a third of customers but over half of sales. That analysis became the dashboard's customer-health KPIs.
 
+### Where the profit comes from
+
+Each slice is one region's share of the $1.47M total profit for 2011–2014, sorted largest first, clockwise from the top. Profit is concentrated but not dependent on any single region: the top three (Central, North and North Asia) earn 46% of it, while EMEA, the Caribbean, Southeast Asia and Canada together earn under 8%. A share of profit reflects how big a region is, not how efficiently it sells: a small region can still earn a healthy margin. That's why the dashboard's market chart measures profit against a margin target instead.
+
 <p align="center">
   <img src="docs/eda-profit-by-region.png" alt="Ring chart of total profit by region, led by Central at 21%" width="70%">
 </p>
+
+### Who the customers are
+
+Every customer is scored 1–5 on **recency** (how recently they ordered), **frequency** (how many orders) and **monetary** value (how much they spent), with 5 the best, then grouped into 10 standard segments by their recency and frequency scores.
+
+- **RFM grid (left).** Recency runs left to right and frequency bottom to top, so the best customers sit top right and the most inactive bottom left. Each block shows the segment's customer count and share of sales.
+- **Customers vs sales (right).** For each segment, the blue bar is its share of customers and the orange bar its share of sales. Orange longer than blue means the segment spends more than its size.
 
 <p align="center">
   <img src="docs/eda-rfm-grid.png" alt="RFM grid: each segment as a block on the recency by frequency score grid, with customer counts and share of sales" width="49%">
   <img src="docs/eda-rfm-segments.png" alt="Bar chart comparing each RFM segment's share of customers with its share of sales" width="49%">
 </p>
+
+What it shows:
+
+- **The best customers carry the business.** Loyal Customers and Champions are 32% of customers but 52% of sales.
+- **The biggest group spends the least.** Hibernating (low recency, low frequency) is the largest segment, with 25% of customers, but brings in only 9% of sales.
+- **Valuable customers are slipping away.** At Risk and Can't Lose are 741 customers who used to order often but haven't recently. They account for 19% of sales, which became the dashboard's *Revenue at Risk* KPI.
 
 The discount finding below came from following up on the margin question that the notebook raised.
 
