@@ -13,4 +13,8 @@ def raw_path() -> Path:
 
 
 def load() -> pd.DataFrame:
-    return pd.read_csv(raw_path(), parse_dates=["Order Date", "Ship Date"])
+    df = pd.read_csv(raw_path())
+    # df = df.drop(columns=["Order Date", "Ship Date"])
+    jan1 = pd.to_datetime(df["Year"].astype(str) + "-01-01")
+    df["Order Week"] = jan1 + pd.to_timedelta((df["weeknum"] - 1) * 7, unit="D")
+    return df
